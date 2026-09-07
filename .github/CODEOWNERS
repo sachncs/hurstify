@@ -1,0 +1,16 @@
+# hurstify code ownership
+
+# Default: maintainers own everything unless overridden below.
+* @sachncs
+
+# Library surface (stable, API-breaking changes need review).
+/lib/ @sachncs
+/lib/*.d.ts @sachncs
+
+# Demo (Next.js app) is owned primarily by the demo maintainers.
+/demo/ @sachncs
+/demo/app/ @sachncs
+/demo/components/ @sachncs
+
+# CI / release.
+/.github/workflows/ @sachncs

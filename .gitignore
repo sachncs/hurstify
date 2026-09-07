@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+
+# Coverage
+coverage
+.nyc_output
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+out/
+.eslintcache
+.cache/
+tmp/
+temp/
+
+# Next.js
+demo/.next/
+demo/next-env.d.ts
+*.tsbuildinfo
+
+# Package artifacts
+*.tgz
+
+# Environment
+.env
+.env.test
+.env.*.local
+
+# IDE
+.idea
+.vscode
+.atom
+
+# OS
+.DS_Store
+
+# Generated experiment outputs
+data/samples/
+
+# Husky v9 internal runtime directory (do not commit;
+# tracked by .husky/_/.gitignore)
+.husky/_
