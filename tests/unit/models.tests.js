@@ -37,6 +37,14 @@ describe('RoughBergomiModel', function () {
     expect(result.prices[0]).to.have.lengthOf(51);
     expect(result.prices[0][0]).to.equal(100);
   });
+
+  it('produces finite positive price paths after .price(sim)', function () {
+    const sim = model.simulate({nPaths: 1, nSteps: 50, h: 0.1});
+    const result = model.price(sim);
+    expect(result.prices[0].every((v) => Number.isFinite(v) && v > 0)).to.equal(
+      true,
+    );
+  });
 });
 
 describe('RoughFsvModel', function () {
@@ -57,6 +65,14 @@ describe('RoughFsvModel', function () {
     expect(result.prices[0]).to.have.lengthOf(51);
     expect(result.prices[0][0]).to.equal(100);
     expect(result.volatilities).to.have.lengthOf(1);
+  });
+
+  it('produces finite positive price paths after .price(sim)', function () {
+    const sim = model.simulate({nSteps: 50, h: 0.1});
+    const result = model.price(sim);
+    expect(result.prices[0].every((v) => Number.isFinite(v) && v > 0)).to.equal(
+      true,
+    );
   });
 });
 
