@@ -287,6 +287,8 @@ shrinks it quadratically.
   the estimator.
 - **[Observatory](#observatory)** — Launch the interactive Next.js +
   shadcn/ui app and explore `H` visually.
+- **[Project site](https://sachncs.github.io/hurstify/)** — Published
+  GitHub Pages site with rendered docs.
 - **[Project Structure](#project-structure)** — How the package is
   laid out, for the curious.
 - **[Tech Stack](#tech-stack)** — Build tools, test runners, and
