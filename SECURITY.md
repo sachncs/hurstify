@@ -47,4 +47,4 @@ We use [Dependabot](https://github.com/dependabot) to keep dependencies up to da
 
 ## Contact
 
-For any security concerns, please open a [private issue](https://github.com/sachncs/randomized-kolmogorov-smirnov-analysis-of-volatility-roughness/issues) or contact the maintainers directly.
+For any security concerns, please open a [private issue](https://github.com/sachncs/hurstify/issues) or contact the maintainers directly.
