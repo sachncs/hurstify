@@ -228,7 +228,7 @@ own subclass or look up by key:
 import {Hurstify, optimizerRegistry} from 'hurstify';
 
 // Look up by key (returns a fresh instance each call)
-const Brent = optimizerRegistry.get('brent');
+const Brent = optimizerRegistry.resolve('brent');
 
 const r = new Hurstify({
   scaleA1: 1,
