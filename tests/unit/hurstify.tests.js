@@ -293,6 +293,20 @@ describe('Inference', function () {
     expect(result.predictions).to.have.lengthOf(hHistory.length);
   });
 
+  it('should accept q=0 in Kalman filter (no silent replacement)', function () {
+    const hHistory = Array.from({length: 50}, () => 0.1 + Math.random() * 0.02);
+    const result = runKalmanFilter(hHistory, {q: 0, r: 0.1});
+    expect(result.filtered.every((v) => Number.isFinite(v))).to.equal(true);
+    expect(result.predictions.every((v) => Number.isFinite(v))).to.equal(true);
+  });
+
+  it('should accept r=0 in Kalman filter (no silent replacement)', function () {
+    const hHistory = Array.from({length: 50}, () => 0.1 + Math.random() * 0.02);
+    const result = runKalmanFilter(hHistory, {q: 0.01, r: 0});
+    expect(result.filtered.every((v) => Number.isFinite(v))).to.equal(true);
+    expect(result.predictions.every((v) => Number.isFinite(v))).to.equal(true);
+  });
+
   it('should compute KS critical value', function () {
     const cv = ksCriticalValue(500, 500, 0.05);
     expect(cv).to.be.above(0);
