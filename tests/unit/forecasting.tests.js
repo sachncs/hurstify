@@ -45,6 +45,13 @@ describe('HoltWintersForecaster', function () {
     expect(forecast).to.be.above(0);
   });
 
+  it('clamps output to [0.01, 0.99]', function () {
+    const forecaster = new HoltWintersForecaster({alpha: 0.9, beta: 0.9});
+    const series = [100, 200, 300, 400, 500];
+    const forecast = forecaster.predict(series);
+    expect(forecast).to.be.within(0.01, 0.99);
+  });
+
   it('throws for empty series', function () {
     const forecaster = new HoltWintersForecaster();
     expect(() => forecaster.predict([])).to.throw('series must be non-empty');
@@ -76,6 +83,13 @@ describe('LstmForecaster', function () {
     expect(Number.isFinite(prediction)).to.equal(true);
   });
 
+  it('clamps output to [0.01, 0.99]', function () {
+    const forecaster = new LstmForecaster({hiddenSize: 8});
+    const series = Array.from({length: 200}, () => Math.random() * 100 - 50);
+    const prediction = forecaster.predict(series);
+    expect(prediction).to.be.within(0.01, 0.99);
+  });
+
   it('throws for empty series', function () {
     const forecaster = new LstmForecaster();
     expect(() => forecaster.predict([])).to.throw('series must be non-empty');
@@ -93,6 +107,13 @@ describe('AttentionForecaster', function () {
     const prediction = forecaster.predict([0.1, 0.2, 0.3, 0.4]);
     expect(prediction).to.be.a('number');
     expect(Number.isFinite(prediction)).to.equal(true);
+  });
+
+  it('clamps output to [0.01, 0.99]', function () {
+    const forecaster = new AttentionForecaster({hiddenSize: 8});
+    const series = Array.from({length: 200}, () => Math.random() * 100 - 50);
+    const prediction = forecaster.predict(series);
+    expect(prediction).to.be.within(0.01, 0.99);
   });
 
   it('throws for empty series', function () {
