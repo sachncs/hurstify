@@ -201,10 +201,18 @@ const hEstimate = r.estimateSingle(path);
 Predict the next-step Hurst parameter from an H-series:
 
 ```javascript
-import {ArfimaForecaster, HoltWintersForecaster, createLstm} from 'hurstify';
+import {
+  ArfimaForecaster,
+  HoltWintersForecaster,
+  LstmForecaster,
+  AttentionForecaster,
+} from 'hurstify';
 
-const arfima = new ArfimaForecaster({arOrder: 1, maOrder: 1, dOrder: 0.4});
-const forecast = arfima.forecast(hHistory, {horizon: 5});
+const arfima = new ArfimaForecaster({p: 1, q: 1, d: 0.4, window: 256});
+const forecast = arfima.predict(hHistory);
+
+const holt = new HoltWintersForecaster({alpha: 0.3, beta: 0.1});
+const lstm = new LstmForecaster({hiddenSize: 16, inputSize: 1});
 ```
 
 ## Next Steps
