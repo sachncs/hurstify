@@ -307,6 +307,31 @@ describe('Inference', function () {
     expect(result.predictions.every((v) => Number.isFinite(v))).to.equal(true);
   });
 
+  it('Kalman filter and likelihood helpers share state evolution', async function () {
+    const {kalmanStep} = await import('../../lib/inference/filtering.js');
+    const {ConstancyTest} =
+      await import('../../lib/strategies/hypothesis-test.js');
+    const obs = [0.1, 0.12, 0.08, 0.15, 0.09];
+    const q = 0.01;
+    const r = 0.1;
+    const direct = [];
+    let x = obs[0];
+    let p = 1.0;
+    for (let i = 1; i < obs.length; i++) {
+      const step = kalmanStep(x, p, obs[i], q, r);
+      direct.push(step.x);
+      x = step.x;
+      p = step.p;
+    }
+    const filtered = runKalmanFilter(obs, {q, r}).filtered.slice(1);
+    for (let i = 0; i < direct.length; i++) {
+      expect(filtered[i]).to.be.closeTo(direct[i], 1e-12);
+    }
+    const ct = new ConstancyTest();
+    const lrStat = ct.run(obs, {q, r}).lrStat;
+    expect(Number.isFinite(lrStat)).to.equal(true);
+  });
+
   it('should compute KS critical value', function () {
     const cv = ksCriticalValue(500, 500, 0.05);
     expect(cv).to.be.above(0);
