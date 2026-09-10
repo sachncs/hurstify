@@ -36,8 +36,8 @@ This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDU
 2. **Clone your fork** locally:
 
    ```bash
-   git clone https://github.com/<your-username>/randomized-kolmogorov-smirnov-analysis-of-volatility-roughness.git
-   cd randomized-kolmogorov-smirnov-analysis-of-volatility-roughness
+   git clone https://github.com/<your-username>/hurstify.git
+   cd hurstify
    ```
 
 3. **Install dependencies**:
@@ -258,8 +258,8 @@ When adding new features, update the README with:
 
 ## Community
 
-- **Issues**: [GitHub Issues](https://github.com/sachncs/randomized-kolmogorov-smirnov-analysis-of-volatility-roughness/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/sachncs/randomized-kolmogorov-smirnov-analysis-of-volatility-roughness/discussions)
+- **Issues**: [GitHub Issues](https://github.com/sachncs/hurstify/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/sachncs/hurstify/discussions)
 
 ## License
 

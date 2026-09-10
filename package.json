@@ -68,7 +68,7 @@
   "author": "Sachin <sachncs@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sachncs/randomized-kolmogorov-smirnov-analysis-of-volatility-roughness/issues"
+    "url": "https://github.com/sachncs/hurstify/issues"
   },
   "engines": {
     "node": ">=24"
