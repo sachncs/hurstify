@@ -40,7 +40,7 @@ npm run start:demo     # serves the production build
 The Next.js app imports the library source directly via a path alias:
 
 ```ts
-import {Hurstify, generateFBM} from '../../../lib/index.js';
+import {Hurstify, generateFractionalBrownianMotion} from '../../../lib/index.js';
 ```
 
 `next.config.ts` enables `experimental.externalDir` so the bundler picks up
