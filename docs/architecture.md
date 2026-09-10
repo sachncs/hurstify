@@ -242,10 +242,28 @@ const r = new Hurstify({
 ### `Registry<T>`
 
 A single generic `Registry<T>` (`lib/strategies/registry.js`) backs
-every strategy family — `optimizerRegistry`, `samplerRegistry`,
-`kernelRegistry`, `ksObjectiveRegistry`, `modelRegistry`,
-`forecasterRegistry`. New entries register via `registry.register(key,
-factory)` and resolve via `registry.get(key)`.
+three strategy families:
+
+- `optimizerRegistry` (`lib/optimization/registry.js`) — look up a
+  built-in optimizer by key (`'brent'`, `'nelder-mead'`, `'annealing'`,
+  `'de'`, `'ags'`).
+- `modelRegistry` (`lib/models/index.js`) — rough-volatility simulators
+  (`'rBergomi'`, `'rFSV'`, `'fOU'`, `'fOU-exact'`, `'mPRE'`, `'mPRE-exact'`).
+- `forecasterRegistry` (`lib/models/index.js`) — H-series forecasters
+  (`'arfima'`, `'holtWinters'`, `'lstm'`, `'attention'`).
+
+For the remaining strategy families (sampler, kernel, KS objective) the
+public surface uses factory functions instead of registries:
+
+- `defaultSampler(blockSize)` selects a `BlockPermutationSampler` or
+  `ReservoirSampler` based on the block length.
+- `new RiemannLiouvilleKernel(H)` / `new TimeVaryingKernel(hPath, dt)`
+  are instantiated directly.
+- `chooseKsObjective(scales, weights)` selects a pairwise, multi-scale,
+  or weighted multi-scale objective based on the inputs.
+
+New entries register via `registry.register(key, factory)` and resolve
+via `registry.resolve(key)` (or `registry.resolveOr(key, fallback)`).
 
 ### Builder-Style Constructor
 
