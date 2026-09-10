@@ -131,11 +131,11 @@ source tree.
 Open a Node interpreter (`node` in your terminal) and try this:
 
 ```javascript
-import {Hurstify, generateFBM} from 'hurstify';
+import {Hurstify, generateFractionalBrownianMotion} from 'hurstify';
 
 // Generate a synthetic rough-volatility path with H = 0.1
 // (Fractional Brownian motion with a Hurst parameter of 0.1)
-const path = generateFBM(2000, 0.1);
+const path = generateFractionalBrownianMotion(2000, 0.1);
 
 // Estimate Ĥ in a single call
 const r = new Hurstify({
