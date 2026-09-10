@@ -60,20 +60,6 @@ rebrand is cosmetic + ergonomic — algorithm behavior and public API are unchan
 - CODEOWNERS for `lib/` and `demo/`.
 - 191 tests still passing under the new name.
 
-**Migration**
-
-```bash
-npm uninstall rksavr
-npm install hurstify
-```
-
-```diff
--import { RKSAVR } from 'rksavr';
-+import { RKSAVR } from 'hurstify';
-```
-
-## [2.0.0] - hurstify rebrand
-
 ### Changed
 
 - **Brand**: Package renamed from `rksavr` to **`hurstify`**. GitHub repo renamed.
@@ -82,23 +68,15 @@ npm install hurstify
 - **Removed**: `vite`, `chart.js`, `plotly.js-dist-min` (legacy demo stack).
 - **Type declarations**: Hand-written `lib/*.d.ts` per module for typed imports from the Next.js demo.
 - **Tests**: Reorganized into `tests/unit/`, `tests/integration/`, `tests/fixtures/`.
+- **CJS Bundle**: Renamed to `dist/index.cjs.js` so `require()` works under `"type": "module"`.
+- **Demo Dependencies**: `chart.js` and `plotly.js-dist-min` moved from `dependencies` to `devDependencies`.
+- **README.md**: Updated repo links, added development workflow, testing, building, and publishing sections.
 
 ### Added
 
 - **Code-quality gates**: Husky pre-commit, lint-staged on changed files, commitlint enforcing Conventional Commits.
 - **CODEOWNERS** for `lib/` and `demo/` directories.
 - **Open Graph metadata** in the observatory layout for sharing on socials.
-
-### Preserved
-
-- Public API surface is unchanged: all 190 tests pass under the new name.
-- Rollup builds ESM + CJS + IIFE bundles under the new banner.
-- Algorithm behavior is bit-identical to v1.x — rebrand was cosmetic + ergonomics.
-
-### Added
-
-#### Production Package Infrastructure
-
 - **Build System** (`rollup.dist.config.js`): Rollup with Babel producing ESM, ES5, CJS, and IIFE bundles.
 - **Dual-Format Publishing** (`package.json`): Conditional exports for `import` and `require`, `files` whitelist, zero runtime dependencies.
 - **StandardJS Linting**: Replaced ESLint with `standard` + `snazzy` for zero-config linting.
@@ -110,9 +88,6 @@ npm install hurstify
   - `publish.yml`: Docs + build + dry-run publish.
   - `codeql-analysis.yml`: Security analysis.
 - **Community Files**: `LICENSE`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, issue/PR templates, `FUNDING.yml`, `dependabot.yml`.
-
-#### Paper Fidelity & Core Fixes
-
 - **Asymptotic Variance** (`lib/inference/asymptotic.js`): Corrected to Proposition 2.9 formula `(2πe)/(ln a)² · (1/√n + 1/√m)²`.
 - **Block Random Permutation** (`lib/stats.js`): Paper-faithful implementation with optional random phase offset, preserving marginal distributions while stripping autocorrelation.
 - **Configurable H Bounds** (`lib/rksavr.js`): `hMin`/`hMax` constructor options passed to optimizers and clamped on results.
@@ -120,24 +95,30 @@ npm install hurstify
 - **Constancy Test** (`lib/inference/filtering.js`): Likelihood ratio test for Kalman `q=0` vs `q>0`.
 - **Bootstrap CI** (`lib/inference.js`): Non-parametric bootstrap with seeded PRNG for reproducibility.
 - **CUSUM / Breakpoint Detection** (`lib/inference.js`): Structural break detection in H(t) series.
-
-#### Algorithmic Optimizations
-
 - **Zero-Allocation Rescaled KS** (`lib/stats.js:ksDistanceRescaled`): Applies `scale^(-H)` inline during the pointer walk — eliminates two array allocations per optimizer evaluation.
 - **Fixed `getIncrementsMulti`** (`lib/rksavr.js`): Replaced buggy single-pass loop with correct per-scale computation.
 - **`estimateSingleWithDiagnostics`** (`lib/rksavr.js`): Returns both H and minimized KS distance D.
-
-#### Restored Modules
-
 - **Noise Correction** (`lib/noise.js`): `preavgReturns`, `realizedKernel` (Bartlett/Parzen/Tukey-Hanning), `logVolDebias`.
 - **Forecasting** (`lib/models/forecasting.js`): `holtWintersForecast`, `createLSTM` (16/8-dim, Xavier init, full gates), `createAttentionModel` (Q/K/V self-attention).
 - **Central Export Hub** (`lib/index.js`): Single entry point re-exporting all public APIs.
 
-### Changed
+### Preserved
 
-- **CJS Bundle**: Renamed to `dist/index.cjs` so `require()` works under `"type": "module"`.
-- **Demo Dependencies**: `chart.js` and `plotly.js-dist-min` moved from `dependencies` to `devDependencies`.
-- **README.md**: Updated repo links, added development workflow, testing, building, and publishing sections.
+- Public API surface is unchanged: all 190 tests pass under the new name.
+- Rollup builds ESM + CJS + IIFE bundles under the new banner.
+- Algorithm behavior is bit-identical to v1.x — rebrand was cosmetic + ergonomics.
+
+**Migration**
+
+```bash
+npm uninstall rksavr
+npm install hurstify
+```
+
+```diff
+-import { RKSAVR } from 'rksavr';
++import { RKSAVR } from 'hurstify';
+```
 
 ### Fixed
 
