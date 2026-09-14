@@ -1,0 +1,17 @@
+{
+  "name": "hurstify",
+  "short_name": "hurstify",
+  "description": "A zero-dependency JavaScript library for estimating the Hurst parameter of rough-volatility processes.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f3ecdf",
+  "theme_color": "#f3ecdf",
+  "icons": [
+    {
+      "src": "/brand/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

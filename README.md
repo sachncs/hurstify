@@ -106,10 +106,10 @@ npm test
 After this, you can also launch the interactive observatory:
 
 ```bash
-npm run dev:demo
+npm run dev:site
 ```
 
-Then open the URL it prints (typically `http://localhost:5173`).
+Then open the URL it prints (typically `http://localhost:5173/hurstify`).
 
 To import hurstify from your own project, link the cloned checkout:
 
@@ -310,10 +310,10 @@ hurstify ships an interactive Next.js 16 + shadcn/ui app for live
 `H` estimation, parameter grid search, and replicated paper figures.
 
 ```bash
-npm run dev:demo
+npm run dev:site
 ```
 
-Then open the URL it prints (typically `http://localhost:5173`).
+Then open the URL it prints (typically `http://localhost:5173/hurstify`).
 Useful when you'd rather click than code.
 
 ---
@@ -333,7 +333,10 @@ hurstify/
 │   ├── random.js              # Hosking fGn/fBm
 │   ├── prng.js                # Seedable mulberry32 PRNG
 │   └── logger.js              # Leveled logger
-├── demo/                      # Next.js 16 + shadcn/ui observatory
+├── site/                      # Next.js 16 site (landing page + observatory)
+│   ├── app/                   # App router pages
+│   ├── components/            # UI + landing sections
+│   └── lib/                   # Site-only utilities
 ├── tests/                     # Mocha + Chai test suites
 │   ├── unit/                  #   unit tests
 │   ├── integration/           #   end-to-end tests
@@ -354,7 +357,8 @@ npm run lint          # ESLint + Prettier
 npm run test          # Mocha + Chai test suites
 npm run build         # Rollup → dist/
 npm run docs          # JSDoc → docs/ + API.md
-npm run dev:demo      # Next.js observatory
+npm run dev:site      # Next.js landing + observatory
+npm run export:site   # Static export for GitHub Pages
 ```
 
 ---

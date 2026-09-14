@@ -219,6 +219,6 @@ const lstm = new LstmForecaster({hiddenSize: 16, inputSize: 1});
 
 - Read the [API Reference](../API.md) for the full symbol list.
 - Read the [Architecture Guide](architecture.md) for the strategy-injection design.
-- Explore the [interactive observatory](../demo/) — launch it locally with
-  `npm run dev:demo`.
+- Explore the [interactive observatory](../site/) — launch it locally with
+  `npm run dev:site`.
 - See [CONTRIBUTING.md](../CONTRIBUTING.md) if you'd like to contribute.

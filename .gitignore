@@ -12,14 +12,15 @@ node_modules/
 # Build outputs
 dist/
 out/
+site/out/
+site/.next/
+site/next-env.d.ts
 .eslintcache
 .cache/
 tmp/
 temp/
 
 # Next.js
-demo/.next/
-demo/next-env.d.ts
 *.tsbuildinfo
 
 # Package artifacts
