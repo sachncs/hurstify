@@ -15,12 +15,6 @@ permissions:
   pages: write
   id-token: write
 
-# OIDC + environment restrictions; set to "github-pages" once the
-# environment exists in the repository settings.
-environment:
-  name: github-pages
-  url: ${{ steps.deployment.outputs.page_url }}
-
 jobs:
   build:
     name: Build site
@@ -53,6 +47,13 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+    # Attach the deploy job to the `github-pages` environment once it
+    # exists in repository settings. If the environment has not been
+    # created (e.g. on a freshly-enabled Pages site), the deploy job
+    # still runs and publishes through `actions/deploy-pages@v4`.
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
