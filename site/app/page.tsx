@@ -182,7 +182,7 @@ export default function LandingPage() {
               </p>
               <a
                 className="mt-6 inline-flex items-center gap-1 text-sm text-primary"
-                href="https://github.com/sachncs/hurstify/blob/master/docs/getting-started.md"
+                href="/docs#quick-start"
                 target="_blank"
                 rel="noreferrer"
               >
