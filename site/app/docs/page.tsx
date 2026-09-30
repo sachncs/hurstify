@@ -2,18 +2,9 @@ import type {Metadata} from 'next';
 import Link from 'next/link';
 import {ArrowRight, BookOpen, FlaskConical, Terminal} from 'lucide-react';
 import {BrandMark} from '@/components/landing/brand-mark';
+import {QuickStart} from './quick-start';
 
 export const metadata: Metadata = {title: 'Docs', description: 'Explanatory guides for estimating volatility roughness with Hurstify.'};
-
-const code = `import { Hurstify, generateFractionalBrownianMotion } from 'hurstify';
-
-const path = generateFractionalBrownianMotion(2000, 0.1);
-const estimator = new Hurstify({
-  scaleA1: 1, scaleA2: 25, sampleSize: 500, iterations: 16,
-});
-
-const result = estimator.estimateSingleWithDiagnostics(path);
-console.log(result.H);`;
 
 const guides = [
   ['Start here', 'Run your first estimate, understand the result, and choose sensible defaults.', Terminal, '#quick-start'],
@@ -22,5 +13,40 @@ const guides = [
 ] as const;
 
 export default function DocsPage() {
-  return <main className="mx-auto min-h-screen max-w-6xl px-5 py-10 sm:px-8 lg:px-10"><div className="flex items-center justify-between"><Link href="/" aria-label="hurstify home"><BrandMark size={30} withWordmark /></Link><Link href="/api" className="text-sm text-primary">API Reference <ArrowRight className="ml-1 inline h-3.5 w-3.5" /></Link></div><div className="max-w-3xl pb-10 pt-24"><p className="eyebrow">Documentation</p><h1 className="display-serif mt-3 text-5xl">Understand the signal before you tune the model.</h1><p className="mt-6 text-lg leading-relaxed text-muted-foreground">Explanatory guides for using Hurstify in real workflows. Learn the concepts here; use the API Reference when you need every public option and export.</p></div><div className="grid gap-4 md:grid-cols-3">{guides.map(([title, body, Icon, href]) => <a key={title} href={href} className="rounded-2xl border border-border bg-card p-6 shadow-card transition-colors hover:border-primary/50"><Icon className="h-5 w-5 text-primary" /><h2 className="mt-8 text-lg font-medium">{title}</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p><span className="mt-6 inline-flex items-center gap-1 text-sm text-primary">Read guide <ArrowRight className="h-3.5 w-3.5" /></span></a>)}</div><div className="mt-16 space-y-16"><section id="quick-start" className="scroll-mt-8"><p className="eyebrow">01 · Start here</p><h2 className="display-serif mt-3 text-4xl">Install from source and estimate H.</h2><p className="mt-4 max-w-2xl text-muted-foreground">Hurstify is currently consumed from this repository rather than an npm release. Clone it, install the development dependencies, and build the distribution bundles before linking it into another project.</p><div className="mt-6 grid gap-4 lg:grid-cols-2"><div className="code-panel overflow-hidden rounded-2xl border border-border"><pre className="overflow-x-auto p-5 text-xs leading-6 text-white/85"><code>{`git clone https://github.com/sachncs/hurstify.git\ncd hurstify\nnpm install\nnpm run build`}</code></pre></div><div className="code-panel overflow-hidden rounded-2xl border border-border"><pre className="overflow-x-auto p-5 text-xs leading-6 text-white/85"><code>{code}</code></pre></div></div></section><section id="what-h-means" className="scroll-mt-8 rounded-2xl border border-border bg-secondary/40 p-7 sm:p-10"><p className="eyebrow">02 · Concepts</p><h2 className="display-serif mt-3 text-4xl">What does H mean?</h2><p className="mt-4 max-w-2xl text-muted-foreground">The Hurst parameter describes how increments scale and how motion relates to its own past. It is a roughness descriptor, not a promise about future prices.</p><div className="mt-8 grid gap-6 sm:grid-cols-3"><div><strong className="font-mono text-primary">H &lt; 0.5</strong><h3 className="mt-2 font-medium">Anti-persistent</h3><p className="mt-1 text-sm text-muted-foreground">Successive movement tends to reverse more often; paths look rougher.</p></div><div><strong className="font-mono">H ≈ 0.5</strong><h3 className="mt-2 font-medium">Brownian-like</h3><p className="mt-1 text-sm text-muted-foreground">The familiar memoryless scaling of a Brownian path.</p></div><div><strong className="font-mono text-primary">H &gt; 0.5</strong><h3 className="mt-2 font-medium">Persistent</h3><p className="mt-1 text-sm text-muted-foreground">Movement is smoother and local direction persists longer.</p></div></div></section><section id="methodology" className="scroll-mt-8"><p className="eyebrow">03 · Methodology</p><h2 className="display-serif mt-3 text-4xl">RK-SAVR, in seven steps.</h2><p className="mt-4 max-w-2xl text-muted-foreground">Hurstify is an independent implementation of the RK-SAVR algorithm described by Angelini &amp; Bianchi (2025). The estimator compares rescaled increment distributions with a randomized two-sample Kolmogorov–Smirnov distance.</p><ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{['Segment the window', 'Compute increments', 'Permute blocks', 'Subsample increments', 'Rescale by H', 'Minimize KS distance', 'Average iterations'].map((step, index) => <li key={step} className="rounded-xl border border-border bg-card p-4"><span className="font-mono text-xs text-primary">0{index + 1}</span><p className="mt-4 text-sm font-medium">{step}</p></li>)}</ol><div className="mt-8 flex flex-wrap gap-4 text-sm"><a href="https://arxiv.org/abs/2509.20015v3" target="_blank" rel="noreferrer" className="text-primary">Read the research paper ↗</a><Link href="/api" className="text-primary">Browse every API symbol →</Link></div></section></div></main>;
+  return (
+    <main className="mx-auto min-h-screen max-w-6xl px-5 py-10 sm:px-8 lg:px-10">
+      <div className="flex items-center justify-between">
+        <Link href="/" aria-label="hurstify home"><BrandMark size={30} withWordmark /></Link>
+        <Link href="/api" className="text-sm text-primary">API Reference <ArrowRight className="ml-1 inline h-3.5 w-3.5" /></Link>
+      </div>
+
+      <div className="max-w-3xl pb-10 pt-24">
+        <p className="eyebrow">Documentation</p>
+        <h1 className="display-serif mt-3 text-5xl">Understand the signal before you tune the model.</h1>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">Explanatory guides for using Hurstify in real workflows. Learn the concepts here; use the API Reference when you need every public option and export.</p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        {guides.map(([title, body, Icon, href]) => <a key={title} href={href} className="rounded-2xl border border-border bg-card p-6 shadow-card transition-colors hover:border-primary/50"><Icon className="h-5 w-5 text-primary" /><h2 className="mt-8 text-lg font-medium">{title}</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p><span className="mt-6 inline-flex items-center gap-1 text-sm text-primary">Read guide <ArrowRight className="h-3.5 w-3.5" /></span></a>)}
+      </div>
+
+      <div className="mt-16 space-y-16">
+        <section id="quick-start" className="scroll-mt-8">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div><p className="eyebrow">01 · Start here</p><h2 className="display-serif mt-3 text-4xl">Install from source and estimate H.</h2></div>
+            <span className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground">About 2 minutes</span>
+          </div>
+          <p className="mt-4 max-w-2xl text-muted-foreground">Hurstify is currently consumed from this repository rather than an npm release. Build it once, then use the same public API shown in the live demo.</p>
+          <QuickStart />
+        </section>
+
+        <section id="what-h-means" className="scroll-mt-8 rounded-2xl border border-border bg-secondary/40 p-7 sm:p-10">
+          <p className="eyebrow">02 · Concepts</p><h2 className="display-serif mt-3 text-4xl">What does H mean?</h2><p className="mt-4 max-w-2xl text-muted-foreground">The Hurst parameter describes how increments scale and how motion relates to its own past. It is a roughness descriptor, not a promise about future prices.</p>
+          <div className="mt-8 grid gap-6 sm:grid-cols-3"><div><strong className="font-mono text-primary">H &lt; 0.5</strong><h3 className="mt-2 font-medium">Anti-persistent</h3><p className="mt-1 text-sm text-muted-foreground">Successive movement tends to reverse more often; paths look rougher.</p></div><div><strong className="font-mono">H ≈ 0.5</strong><h3 className="mt-2 font-medium">Brownian-like</h3><p className="mt-1 text-sm text-muted-foreground">The familiar memoryless scaling of a Brownian path.</p></div><div><strong className="font-mono text-primary">H &gt; 0.5</strong><h3 className="mt-2 font-medium">Persistent</h3><p className="mt-1 text-sm text-muted-foreground">Movement is smoother and local direction persists longer.</p></div></div>
+        </section>
+
+        <section id="methodology" className="scroll-mt-8"><p className="eyebrow">03 · Methodology</p><h2 className="display-serif mt-3 text-4xl">RK-SAVR, in seven steps.</h2><p className="mt-4 max-w-2xl text-muted-foreground">Hurstify is an independent implementation of the RK-SAVR algorithm described by Angelini &amp; Bianchi (2025). The estimator compares rescaled increment distributions with a randomized two-sample Kolmogorov–Smirnov distance.</p><ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{['Segment the window', 'Compute increments', 'Permute blocks', 'Subsample increments', 'Rescale by H', 'Minimize KS distance', 'Average iterations'].map((step, index) => <li key={step} className="rounded-xl border border-border bg-card p-4"><span className="font-mono text-xs text-primary">0{index + 1}</span><p className="mt-4 text-sm font-medium">{step}</p></li>)}</ol><div className="mt-8 flex flex-wrap gap-4 text-sm"><a href="https://arxiv.org/abs/2509.20015v3" target="_blank" rel="noreferrer" className="text-primary">Read the research paper ↗</a><Link href="/api" className="text-primary">Browse every API symbol →</Link></div></section>
+      </div>
+    </main>
+  );
 }
