@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {cn} from '@/lib/utils';
+import {siteBasePath} from '@/lib/site-url';
 
 type BrandMarkProps = {
   size?: number;
@@ -36,7 +37,7 @@ export function BrandMark({
         style={{width: size, height: size}}
       >
         <img
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/brand/logo.svg`}
+          src={`${siteBasePath}/brand/logo.svg`}
           alt=""
           className="h-full w-full rounded-md object-cover"
         />

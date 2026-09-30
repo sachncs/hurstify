@@ -245,8 +245,9 @@ console.log(\`Significant at 5%: \${significant}\`);
         title: 'Product',
         links: [
           {label: 'Observatory', href: '/observatory'},
-          {label: 'Methodology', href: '#method'},
-          {label: 'Use cases', href: '#use-cases'},
+          {label: 'Docs', href: '/docs'},
+          {label: 'Methodology', href: '/docs#methodology'},
+          {label: 'Live demo', href: '/#demo'},
           {
             label: 'Changelog',
             href: 'https://github.com/sachncs/hurstify/releases',

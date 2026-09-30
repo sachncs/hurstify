@@ -32,16 +32,21 @@ export const MAIN_CONTENT_ID = 'main-content';
 
 const navItems = [
   {href: '/observatory', label: 'Overview', icon: LayoutDashboard},
-  {href: '/observatory/dashboard', label: 'Real-Time Estimation', icon: Activity},
+  {
+    href: '/observatory/dashboard',
+    label: 'Real-Time Estimation',
+    icon: Activity,
+  },
   {href: '/observatory/explorer', label: 'Parameter Explorer', icon: Workflow},
-  {href: '/observatory/figures', label: 'Figures / Diagnostics', icon: ChartLine},
+  {
+    href: '/observatory/figures',
+    label: 'Figures / Diagnostics',
+    icon: ChartLine,
+  },
 ] as const;
 
 const routeCrumbs: Record<string, Crumb[]> = {
-  '/observatory': [
-    {label: 'Library', href: '/'},
-    {label: 'Overview'},
-  ],
+  '/observatory': [{label: 'Library', href: '/'}, {label: 'Overview'}],
   '/observatory/dashboard': [
     {label: 'Library', href: '/'},
     {label: 'Overview', href: '/observatory'},
@@ -72,11 +77,12 @@ export function AppShell({
   const {theme, toggleTheme} = useTheme();
   const isDark = theme === 'dark';
 
-  const crumbs = breadcrumbs ?? routeCrumbs[pathname] ?? [];
+  const routeKey = pathname.replace(/\/$/, '') || '/';
+  const crumbs = breadcrumbs ?? routeCrumbs[routeKey] ?? [];
 
   return (
     <div className="relative z-10 flex min-h-screen bg-background text-foreground">
-      <aside className="flex w-64 shrink-0 flex-col border-r border-border bg-card/30">
+      <aside className="hidden w-64 shrink-0 flex-col border-r border-border bg-card/30 md:flex">
         <div className="flex flex-col gap-2 px-5 pb-2 pt-7">
           <Link
             href="/"
@@ -195,6 +201,43 @@ export function AppShell({
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
+        <div className="border-b border-border bg-card/30 px-4 py-3 md:hidden">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" aria-label={`${copy.brand.name} home`}>
+              <BrandMark size={28} withWordmark={false} />
+            </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              Observatory
+            </span>
+          </div>
+          <nav
+            aria-label="Mobile primary"
+            className="mt-3 flex gap-1 overflow-x-auto pb-0.5"
+          >
+            {navItems.map(({href, label, icon: Icon}) => {
+              const active =
+                href === '/observatory'
+                  ? routeKey === href
+                  : routeKey.startsWith(href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'inline-flex shrink-0 items-center gap-2 rounded-md px-2.5 py-2 text-xs',
+                    active
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                  )}
+                >
+                  <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
         <Topbar crumbs={crumbs} actions={actions} />
         <main
           id={MAIN_CONTENT_ID}
