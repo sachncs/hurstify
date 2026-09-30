@@ -204,6 +204,21 @@ body {
 .code-panel {
   background: hsl(24 16% 11%);
 }
+.code-keyword {
+  color: #d9a6ff;
+}
+.code-string {
+  color: #b8e986;
+}
+.code-number {
+  color: #f7c873;
+}
+.code-function {
+  color: #7dd3fc;
+}
+.code-comment {
+  color: rgb(255 255 255 / 0.42);
+}
 .chart-grid {
   background-image:
     linear-gradient(to right, hsl(34 18% 78% / 0.18) 1px, transparent 1px),

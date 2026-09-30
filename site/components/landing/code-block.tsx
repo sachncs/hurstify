@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import {Check, Copy, Terminal} from 'lucide-react';
+import {HighlightedCode} from '@/components/landing/highlighted-code';
 
 export function CodeBlock({code}: {code: string}) {
   const [copied, setCopied] = React.useState(false);
@@ -35,7 +36,9 @@ export function CodeBlock({code}: {code: string}) {
         </button>
       </div>
       <pre className="overflow-x-auto p-5 text-xs leading-6 text-white/85">
-        <code>{code}</code>
+        <code>
+          <HighlightedCode code={code} />
+        </code>
       </pre>
     </div>
   );
