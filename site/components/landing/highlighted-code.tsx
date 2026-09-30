@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 const tokenPattern =
-  /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`|\b(?:import|from|const|new|console|log|export|return|class|extends|true|false|null|undefined)\b|\b\d+(?:\.\d+)?\b|\b(?:Hurstify|generateFractionalBrownianMotion|estimateSingleWithDiagnostics|scaleA1|scaleA2|sampleSize|iterations|H)\b)/g;
+  /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`|\b(?:import|from|const|new|console|log|export|return|class|extends|true|false|null|undefined|git|cd|npm|run|install|build)\b|\b\d+(?:\.\d+)?\b|\b(?:Hurstify|generateFractionalBrownianMotion|estimateSingleWithDiagnostics|scaleA1|scaleA2|sampleSize|iterations|H)\b)/g;
 
 function tokenClass(token: string) {
   if (token.startsWith('//') || token.startsWith('/*')) return 'code-comment';
   if (/^[`'\"]/.test(token)) return 'code-string';
   if (/^\d/.test(token)) return 'code-number';
+  if (/^(git|cd|npm|run|install|build)$/.test(token)) return 'code-command';
   if (
     /^(Hurstify|generateFractionalBrownianMotion|estimateSingleWithDiagnostics|scaleA1|scaleA2|sampleSize|iterations|H)$/.test(
       token,
@@ -22,7 +23,7 @@ function isToken(part: string) {
     part.startsWith('/*') ||
     /^[`'\"]/.test(part) ||
     /^\d/.test(part) ||
-    /^(?:import|from|const|new|console|log|export|return|class|extends|true|false|null|undefined|Hurstify|generateFractionalBrownianMotion|estimateSingleWithDiagnostics|scaleA1|scaleA2|sampleSize|iterations|H)$/.test(
+    /^(?:import|from|const|new|console|log|export|return|class|extends|true|false|null|undefined|git|cd|npm|run|install|build|Hurstify|generateFractionalBrownianMotion|estimateSingleWithDiagnostics|scaleA1|scaleA2|sampleSize|iterations|H)$/.test(
       part,
     )
   );

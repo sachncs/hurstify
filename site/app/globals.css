@@ -207,6 +207,9 @@ body {
 .code-keyword {
   color: #d9a6ff;
 }
+.code-command {
+  color: #ffb86b;
+}
 .code-string {
   color: #b8e986;
 }
