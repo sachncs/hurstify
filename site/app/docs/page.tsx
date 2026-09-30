@@ -1,0 +1,16 @@
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {ArrowRight, BookOpen, FlaskConical, Terminal} from 'lucide-react';
+import {BrandMark} from '@/components/landing/brand-mark';
+
+export const metadata: Metadata = {title: 'Docs', description: 'Explanatory guides for estimating volatility roughness with Hurstify.'};
+
+const guides = [
+  ['Start here', 'Run your first estimate in Node.js or the browser, understand the result, and choose sensible defaults.', Terminal],
+  ['What H means', 'Build intuition for anti-persistence, Brownian-like paths, and persistent motion before tuning an estimator.', BookOpen],
+  ['Methodology', 'Learn how RK-SAVR turns rescaled increments into a reproducible Hurst estimate.', FlaskConical],
+];
+
+export default function DocsPage() {
+  return <main className="mx-auto min-h-screen max-w-6xl px-5 py-10 sm:px-8 lg:px-10"><div className="flex items-center justify-between"><Link href="/" aria-label="hurstify home"><BrandMark size={30} withWordmark /></Link><Link href="/api" className="text-sm text-primary">API Reference <ArrowRight className="ml-1 inline h-3.5 w-3.5" /></Link></div><div className="max-w-3xl pb-10 pt-24"><p className="eyebrow">Documentation</p><h1 className="display-serif mt-3 text-5xl">Understand the signal before you tune the model.</h1><p className="mt-6 text-lg leading-relaxed text-muted-foreground">Guides for using Hurstify in real workflows. Start with the concepts and examples, then use the API Reference when you need every option and export.</p></div><div className="grid gap-4 md:grid-cols-3">{guides.map(([title, body, Icon]) => { const GuideIcon = Icon as typeof Terminal; return <article key={title as string} className="rounded-2xl border border-border bg-card p-6 shadow-card"><GuideIcon className="h-5 w-5 text-primary" /><h2 className="mt-8 text-lg font-medium">{title as string}</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body as string}</p><a href={title === 'Start here' ? 'https://github.com/sachncs/hurstify/blob/master/docs/getting-started.md' : title === 'Methodology' ? 'https://github.com/sachncs/hurstify/blob/master/docs/architecture.md' : '#'} target={title === 'What H means' ? undefined : '_blank'} rel="noreferrer" className="mt-6 inline-flex items-center gap-1 text-sm text-primary">Read guide <ArrowRight className="h-3.5 w-3.5" /></a></article>; })}</div><section className="mt-16 rounded-2xl border border-border bg-secondary/40 p-7 sm:p-10"><p className="eyebrow">Choose your path</p><div className="mt-6 grid gap-6 md:grid-cols-2"><div><h2 className="text-lg font-medium">Explanatory docs</h2><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Concepts, examples, design choices, and methodology for people learning the estimator.</p></div><div><h2 className="text-lg font-medium">Exhaustive API</h2><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Every public class, method, option, return shape, generator, inference utility, and model export.</p><Link href="/api" className="mt-4 inline-flex items-center gap-1 text-sm text-primary">Open API Reference <ArrowRight className="h-3.5 w-3.5" /></Link></div></div></section></main>;
+}

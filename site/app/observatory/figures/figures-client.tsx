@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import {AppShell} from '@/components/observatory/app-shell';
 
 const FiguresView = dynamic(
   () => import('@/components/observatory/figures-view').then((m) => m.default),
@@ -20,9 +19,5 @@ const FiguresView = dynamic(
 );
 
 export default function ObservatoryFiguresClient() {
-  return (
-    <AppShell>
-      <FiguresView />
-    </AppShell>
-  );
+  return <FiguresView />;
 }

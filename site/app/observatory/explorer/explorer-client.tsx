@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import {AppShell} from '@/components/observatory/app-shell';
 
 const ExplorerView = dynamic(
   () => import('@/components/observatory/explorer-view').then((m) => m.default),
@@ -20,9 +19,5 @@ const ExplorerView = dynamic(
 );
 
 export default function ObservatoryExplorerClient() {
-  return (
-    <AppShell>
-      <ExplorerView />
-    </AppShell>
-  );
+  return <ExplorerView />;
 }

@@ -2,10 +2,10 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import {AppShell} from '@/components/observatory/app-shell';
 
 const DashboardView = dynamic(
-  () => import('@/components/observatory/dashboard-view').then((m) => m.default),
+  () =>
+    import('@/components/observatory/dashboard-view').then((m) => m.default),
   {
     ssr: false,
     loading: () => (
@@ -20,9 +20,5 @@ const DashboardView = dynamic(
 );
 
 export default function ObservatoryDashboardClient() {
-  return (
-    <AppShell>
-      <DashboardView />
-    </AppShell>
-  );
+  return <DashboardView />;
 }
