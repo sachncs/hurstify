@@ -1,4 +1,5 @@
 import type {Metadata} from 'next';
+import Link from 'next/link';
 import {ArrowUpRight, Check} from 'lucide-react';
 import {SiteNav} from '@/components/landing/site-nav';
 import {LiveDemo} from '@/components/landing/live-demo';
@@ -171,23 +172,21 @@ export default function LandingPage() {
         >
           <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
             <div>
-              <p className="eyebrow">Quick start</p>
+              <p className="eyebrow">Minimal example</p>
               <h2 className="display-serif mt-3 text-4xl">
-                From data to Ĥ in one call.
+                Estimate H in one call.
               </h2>
               <p className="mt-4 text-muted-foreground">
                 The demo uses the same public API you can import in your own
                 app. The package is published from this repository with no
                 runtime dependencies.
               </p>
-              <a
+              <Link
                 className="mt-6 inline-flex items-center gap-1 text-sm text-primary"
                 href="/docs#quick-start"
-                target="_blank"
-                rel="noreferrer"
               >
-                Read getting started <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
+                Open the full guide <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
             <CodeBlock code={quickStart} />
           </div>
@@ -271,14 +270,9 @@ export default function LandingPage() {
                 >
                   Read the paper ↗
                 </a>
-                <a
-                  href="https://github.com/sachncs/hurstify/tree/master/docs"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-primary"
-                >
+                <Link href="/docs#methodology" className="text-primary">
                   Read methodology ↗
-                </a>
+                </Link>
               </div>
             </div>
           </div>

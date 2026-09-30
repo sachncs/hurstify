@@ -48,7 +48,11 @@ export function SiteFooter() {
                   stroke="currentColor"
                   strokeWidth="1.6"
                 >
-                  <path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10Z" strokeLinecap="round" strokeLinejoin="round" />
+                  <path
+                    d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10Z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </a>
             </div>
@@ -65,8 +69,14 @@ export function SiteFooter() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        target={link.href.startsWith('http') ? '_blank' : undefined}
-                        rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                        target={
+                          link.href.startsWith('http') ? '_blank' : undefined
+                        }
+                        rel={
+                          link.href.startsWith('http')
+                            ? 'noreferrer'
+                            : undefined
+                        }
                         className="group inline-flex items-center gap-1 text-sm text-foreground/80 transition-colors hover:text-foreground"
                       >
                         {link.label}
@@ -87,7 +97,7 @@ export function SiteFooter() {
 
         <div className="mt-14 border-t border-border/60 pt-6">
           <p className="text-pretty text-xs text-muted-foreground">
-            © {year}–2026 Sachin · Released under the MIT License · Built
+            © {year} Sachin · Released under the MIT License · Built
             independently of the paper authors.
           </p>
         </div>

@@ -283,7 +283,7 @@ console.log(\`Significant at 5%: \${significant}\`);
       },
     ],
     copyright:
-      '© 2025–2026 Sachin · Released under the MIT License · Built independently of the paper authors.',
+      '© 2026 Sachin · Released under the MIT License · Built independently of the paper authors.',
   },
 };
 
